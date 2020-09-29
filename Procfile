@@ -1,1 +1,1 @@
-web: nest start --watch
+web: nest run start:dev
