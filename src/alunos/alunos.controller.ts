@@ -16,7 +16,7 @@ export class AlunosController {
     }    
 
     @Get(':id')
-    async getAgetById(@Param('id')id:number): Promise<Aluno>{
+    async getAgetById(@Param('id')id:string): Promise<Aluno>{
         return this.alunoService.getById(id);
     } 
 
@@ -25,14 +25,13 @@ export class AlunosController {
         return this.alunoService.create(aluno);
     }
 
-    @Put()
-    async update(@Param('id') id: number, @Body() aluno: Aluno): Promise<Aluno>{
-        aluno.id = id;
-        return this.alunoService.update(aluno);
+    @Put(':id')
+    async update(@Param('id') id: string, @Body() aluno: Aluno): Promise<Aluno>{
+        return this.alunoService.update(id, aluno);
     }
 
     @Delete(':id')
-    async delete(@Param('id') id:number){
+    async delete(@Param('id') id:string){
         this.alunoService.delete(id);
 
     }

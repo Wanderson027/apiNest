@@ -1,52 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { from } from 'rxjs';
 import { Aluno} from './aluno';
+import { InjectModel} from '@nestjs/mongoose'
+import { Model} from 'mongoose'
 
 @Injectable()
 export class AlunoService {
- alunos: Aluno[]= [
-     {id:1, nome:'wanderosn', matricula:12333, semestre:1},
-     {id:2, nome:'Juarez', matricula:12355, semestre:2},
-     {id:3, nome:'Sebastiao', matricula:12355, semestre:3},
-     {id:4, nome:'Ludogero', matricula:123466, semestre:4},
-     {id:5, nome:'Wemerson', matricula:123477, semestre:5},
-     {id:6, nome:'Luanda', matricula:12388, semestre:6},
-     {id:7, nome:'Totorez', matricula:12399, semestre:7}
- ];
-   getAll(){
-    return this.alunos;
+ 
+
+constructor(@InjectModel('Aluno') private readonly alunoModel: Model<Aluno>) {}
+
+   async getAll(){
+      return await this.alunoModel.find().exec();
    }
 
-   getById(id: number){
-    const aluno = this.alunos.find((value)=>value.id==id);
-    return aluno;
+   async getById(id: string){
+      return await this.alunoModel.findById(id).exec();
    }
 
-   create(aluno: Aluno){
-      let lastId = 0;
-      if(this.alunos.length > 0){
-        lastId = this.alunos[this.alunos.length-1].id;
-      }
-
-      aluno.id = lastId+1;
-      this.alunos.push(aluno);
-
-      return aluno;
+   async create(aluno: Aluno){
+      const createdAluno = new this.alunoModel(aluno);
+      return await createdAluno.save();
    }
 
-   update(aluno: Aluno){
-      const alunoArray = this.getById(aluno.id);
-      if(alunoArray){
-        alunoArray.matricula = aluno.matricula;
-        alunoArray.nome = aluno.nome;
-        alunoArray.semestre = aluno.semestre;
-      }
-      return alunoArray;
+   async update(id: string, aluno: Aluno){
+      await this.alunoModel.updateOne({_id: id}, aluno).exec();
+      return this.getById(id);
    }
 
-   delete(id: number){
-      const index = this.alunos.findIndex((value)=> value.id==id);
-      this.alunos.splice(index, 1);
+   async delete(id: string){
+      return await this.alunoModel.deleteOne({_id:id}).exec();
    }
 
     

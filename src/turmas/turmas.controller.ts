@@ -15,7 +15,7 @@ export class TurmasController {
     }    
 
     @Get(':id')
-    async getAgetById(@Param('id')id:number): Promise<Turma>{
+    async getAgetById(@Param('id')id:string): Promise<Turma>{
         return this.turmaService.getById(id);
     } 
 
@@ -25,13 +25,12 @@ export class TurmasController {
     }
 
     @Put()
-    async update(@Param('id') id: number, @Body() turma: Turma): Promise<Turma>{
-        turma.id = id;
-        return this.turmaService.update(turma);
+    async update(@Param('id') id: string, @Body() turma: Turma): Promise<Turma>{
+        return this.turmaService.update(id, turma);
     }
 
     @Delete(':id')
-    async delete(@Param('id') id:number){
+    async delete(@Param('id') id:string){
         this.turmaService.delete(id);
 
     }
