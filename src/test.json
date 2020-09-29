@@ -1,0 +1,25 @@
+http://localhost:3000/alunos
+{
+    "nome": "Ana",
+    "matricula": 87677,
+    "semestre": 1
+}
+
+http://localhost:3000/professores
+
+{
+  
+    "nome": "Ana",
+    "matricula": 12334,
+    "telefone": 61992349454,
+    "email": "Ana@gmail.com"
+}
+
+
+http://localhost:3000/turmas
+{
+  
+    "codigo": 12333,
+    "lider": "Jose",
+    "email": "Ana@gmail.com"
+}
