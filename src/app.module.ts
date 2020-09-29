@@ -9,7 +9,8 @@ import { MongooseModule} from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://root:senha_da_nasa@cluster0.1yxnl.mongodb.net/APINest?retryWrites=true&w=majority'),  
+    MongooseModule.forRoot('mongodb://localhost/APINest'),
+    // MongooseModule.forRoot('mongodb+srv://root:senha_da_nasa@cluster0.1yxnl.mongodb.net/APINest?retryWrites=true&w=majority'),    
     TurmasModule,
     AlunosModule,
     ProfessoresModule
