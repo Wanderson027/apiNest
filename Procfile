@@ -1,1 +1,1 @@
-web: nest run start:prod 
+web: nest run start:dev
